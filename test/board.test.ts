@@ -29,8 +29,22 @@ Deno.test("set board", () => {
 
 
 Deno.test("shuffle", () => {
-    const l: number = 4;
-    const board = new Board(4);
+    const l: number = 6;
+    const board = new Board(l);
     board.shuffle();
-    console.log(JSON.stringify(board.board))
+    assertEquals(sumBoard(board), l*l * (l * l-1) / 2);
+
   });
+
+  function sumBoard(b: Board) {
+      let v=0;
+    let board = b.board;
+    for (let i: number = 0; i < b.size; i++) {
+        for (let j: number = 0; j < b.size; j++) {
+          v += board[i][j];
+        }
+      }
+      return v;
+  }
+
+  
