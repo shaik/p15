@@ -26,3 +26,11 @@ Deno.test("set board", () => {
   board.board = newBoard;
   assertEquals(newBoard, board.board);
 });
+
+
+Deno.test("shuffle", () => {
+    const l: number = 4;
+    const board = new Board(4);
+    board.shuffle();
+    console.log(JSON.stringify(board.board))
+  });

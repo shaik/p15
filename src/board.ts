@@ -12,6 +12,22 @@ export class Board {
     }
   }
 
+  shuffle() {
+    let a: number[] = [];
+    for (let i = this.size * this.size - 1; i > 0; i--) a.push(i);
+    for (let i = this.size * this.size - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+
+    for (let i: number = 0; i < this.size; i++) {
+      this._board[i] = [];
+      for (let j: number = 0; j < this.size; j++) {
+        this._board[i][j] = a.pop() || 0;
+      }
+    }
+  }
+
   get board(): number[][] {
     return this._board;
   }
@@ -21,6 +37,6 @@ export class Board {
   }
 
   get size(): number {
-      return this._size;
+    return this._size;
   }
 }
