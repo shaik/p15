@@ -37,14 +37,7 @@ Deno.test("shuffle", () => {
   });
 
   function sumBoard(b: Board) {
-      let v=0;
-    let board = b.board;
-    for (let i: number = 0; i < b.size; i++) {
-        for (let j: number = 0; j < b.size; j++) {
-          v += board[i][j];
-        }
-      }
-      return v;
+    return b.board.flat().reduce((a, v) => a+v)
   }
 
   
