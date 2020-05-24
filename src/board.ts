@@ -49,6 +49,9 @@ export class Board {
     if (this.board[y][x] === 0) return this.err.cant_move_blank;
     const [px, py]  = this.getBlankPos();
     if (Math.abs(px - x) + Math.abs(py -y) != 1) return this.err.index_too_far
+    
+    this.board[py][px] = this.board[y][x];
+    this.board[y][x] = 0;
     return 0;
   }
 
