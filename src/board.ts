@@ -4,12 +4,23 @@ export class Board {
 
   constructor(size: number) {
     this._size = size;
-    for (let i: number = 0; i < size; i++) {
-      this._board[i] = [];
-      for (let j: number = 0; j < size; j++) {
-        this._board[i][j] = i*size + j;
-      }
-    }
+    this.init();
+  }
+
+  err =  {
+    'index_out_of_bound': 1,
+    'index_too_far': 2,
+    'cant_move_blank': 3
+  }
+  private init() {
+    let a: number[] = [...Array(this.size ** 2).keys()]
+    this.fold(a);
+  }
+
+  private fold(a: number[]) {
+    this._board = [];
+    while (a.length > 0)
+      this._board.push(a.splice(0, this.size));
   }
 
   shuffle() {
@@ -18,10 +29,7 @@ export class Board {
       const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
     }
-
-    this._board = [];
-    while (a.length > 0) this._board.push(a.splice(0, this.size));
-    
+    this.fold(a);
   }
 
   get board(): number[][] {
@@ -34,6 +42,21 @@ export class Board {
 
   get size(): number {
     return this._size;
+  }
+
+  move(x: number, y: number): number{
+    if (x<0 || y<0 || x>=this.size || y>=this.size) return this.err.index_out_of_bound;
+    if (this.board[y][x] === 0) return this.err.cant_move_blank;
+    const [px, py]  = this.getBlankPos();
+    if (Math.abs(px - x) + Math.abs(py -y) != 1) return this.err.index_too_far
+    return 0;
+  }
+
+  private getBlankPos(): [number, number] {
+    const p: number = this.board.flat().findIndex(x => x == 0);
+    const zy: number = Math.floor(p / this.size);
+    const zx: number = p % this.size;
+    return [zx, zy];
   }
 
   toString(): string {
