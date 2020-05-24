@@ -13,13 +13,18 @@ export class Board {
   }
 
   shuffle() {
-    let a: number[] = [];
-    for (let i = this.size * this.size - 1; i > 0; i--) a.push(i);
-    for (let i = this.size * this.size - 1; i > 0; i--) {
+    let a: number[] = [...Array(this.size ** 2 - 1).keys()]
+    for (let i =this.size ** 2 - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
     }
 
+    /*
+    var newArray = [], size = 4;
+    while (someArray.length > 0) newArray.push(someArray.splice(0, size));
+    */
+    
+    
     for (let i: number = 0; i < this.size; i++) {
       this._board[i] = [];
       for (let j: number = 0; j < this.size; j++) {
