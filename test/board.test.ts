@@ -8,13 +8,19 @@ import { Board } from "../src/board.ts";
 Deno.test("setup board", () => {
   const l: number = 4;
 
-  const board = new Board(4);
+  const board = new Board(l);
   assertEquals(board.size, l);
+  assertEquals(sumBoard(board), l*l * (l * l-1) / 2);
+
 });
 
 Deno.test("set board", () => {
   const l: number = 4;
   const board = new Board(l);
+  assertEquals(board.board.length, l);
+  assertEquals(board.board[0].length, l);
+
+
 
   let newBoard: number[][] = [
     [15, 2, 3, 4],
@@ -29,9 +35,12 @@ Deno.test("set board", () => {
 
 
 Deno.test("shuffle", () => {
-    const l: number = 6;
+    const l: number = 3;
     const board = new Board(l);
+    console.log(board.toString())
     board.shuffle();
+    console.log(board.toString())
+
     assertEquals(sumBoard(board), l*l * (l * l-1) / 2);
 
   });
