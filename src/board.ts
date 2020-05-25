@@ -12,7 +12,7 @@ export class Board {
     "index_too_far": 2,
     "cant_move_blank": 3,
   };
-  
+
   private init() {
     let a: number[] = [...Array(this.size ** 2).keys()];
     this.fold(a);
