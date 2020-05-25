@@ -1,6 +1,16 @@
 import { Board } from "./board.ts";
 import { renderBoard } from "./app.ts";
 
+
+let imgs: string[] = [];
+initImageRLs();
+
+function initImageRLs() {
+    for (let i: number=0; i<10; i++){
+        let imgId: number = 752663 + i;
+        imgs[i] = 'https://image.flaticon.com/icons/svg/752/' + imgId + '.svg'
+    }
+}
 export function render (b: Board) :string{
     let s: string = '';
     let l : string[]; 
@@ -17,10 +27,13 @@ export function render (b: Board) :string{
 }
 
 function sq(x: number, y: number, v: number) :string {
-    let img : string = '<img src="https://img.icons8.com/ios-glyphs/90/000000/'+ v +'.png"/>'
+    let img : string = '<img src="' + imgs[v] +'" width="150" height="150"/>'
     let s: string ='';
     s = '<a href ="/move/' + x + '/' + y +'">';
     s += img;
     s+= '</a>';
     return s;
 }
+
+// https://image.flaticon.com/icons/svg/752/752666.svg [good]
+// https://image.flaticon.com/icons/svg/752/7526630.svg [bad]
