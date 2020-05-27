@@ -8,9 +8,9 @@ export class Board {
   }
 
   err = {
-    "index_out_of_bound": 1,
-    "index_too_far": 2,
-    "cant_move_blank": 3,
+    "index_out_of_bound": -1,
+    "index_too_far": -2,
+    "cant_move_blank": -3,
   };
 
   private init() {
@@ -44,6 +44,28 @@ export class Board {
 
   get size(): number {
     return this._size;
+  }
+
+  shuffle(times: number =1) {
+    for (let i=0; i< times; i++) {
+      const optionalMoves=[];
+      const [px, py] = this.getBlankPos();
+      if (this.getVal(px-1,py) > 0 )  optionalMoves.push([px-1,py]);
+      if (this.getVal(px+1,py) > 0 )  optionalMoves.push([px+1,py]);
+      if (this.getVal(px,py-1) > 0 )  optionalMoves.push([px,py-1]);
+      if (this.getVal(px,py+1) > 0 )  optionalMoves.push([px,py+1]);
+      // console.log("options =", optionalMoves);
+      let randomMove = optionalMoves[Math.floor(Math.random() * optionalMoves.length)];
+      //console.log(i, 'move=', randomMove);
+      this.move(randomMove[0], randomMove[1])
+    }
+  }
+
+  private getVal(x: number, y: number) :number{
+    if (x < 0 || y < 0 || x >= this.size || y >= this.size) {
+      return this.err.index_out_of_bound;
+    }
+    return this._board[y][x];
   }
 
   move(x: number, y: number): number {

@@ -36,6 +36,16 @@ Deno.test("set board", () => {
   assertEquals(testBoard, board.board);
 });
 
+Deno.test("shuffle", () => {
+  const l: number = 4;
+  const board = new Board(l);
+  console.log();
+  console.log(board.toString());
+  board.shuffle(999);
+  console.log(board.toString());
+
+});
+
 Deno.test("randomize", () => {
   const l: number = 3;
   const board = new Board(l);
