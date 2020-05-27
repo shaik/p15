@@ -25,7 +25,7 @@ export class Board {
     }
   }
 
-  shuffle() {
+  randomize() {
     let a: number[] = [...Array(this.size ** 2).keys()];
     for (let i = this.size ** 2 - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));

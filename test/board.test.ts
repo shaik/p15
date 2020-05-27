@@ -36,10 +36,10 @@ Deno.test("set board", () => {
   assertEquals(testBoard, board.board);
 });
 
-Deno.test("shuffle", () => {
+Deno.test("randomize", () => {
   const l: number = 3;
   const board = new Board(l);
-  board.shuffle();
+  board.randomize();
   assertEquals(sumBoard(board), l * l * (l * l - 1) / 2);
 });
 
