@@ -2,12 +2,38 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="p15.css">
+        <script type="text/javascript">
+        function init() {
+           console.log('inbit');
+            let e = getGridElement();
+            console.log(e);
+            render();
+        }
+
+        function getGridElement() {
+            return document.querySelector ("#grid");
+        }
+        function render (arr){
+            let e = getGridElement();
+            let h='';
+            for (let i=0; i<16; i++){
+                let s = '<div class="grid-item">' + i*2 + '</div>';
+
+                h += s;
+            }
+            e.innerHTML = h;
+        }
+        </script>
+
     </head>
-<body>
+    
+    </script>
+
+<body onload="init()">
 
 <h1>P15</h1>
 
-<div class="grid-container">
+<div id="grid" class="grid-container">
     <div class="grid-item">1</div>
     <div class="grid-item">2</div>
     <div class="grid-item">3</div>
