@@ -8,7 +8,7 @@ initImageRLs();
 function initImageRLs() {
     for (let i: number=0; i<10; i++){
         let imgId: number = 752663 + i;
-        imgs[i] = 'https://image.flaticon.com/icons/svg/752/' + imgId + '.svg'
+        imgs[i] = 'https://image.flaticon.com/icons/svg/752/' + 752663 + i + '.svg'
     }
 }
 export function render (b: Board) :string{

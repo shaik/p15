@@ -7,7 +7,8 @@
            console.log('inbit');
             let e = getGridElement();
             console.log(e);
-            render();
+            let a = [0, 5, 4, 5, 5, 5, 2, 9, 2, 1, 1, 3, 4, 5, 6, 7, 8, 9]
+            render(a);
         }
 
         function getGridElement() {
@@ -17,11 +18,16 @@
             let e = getGridElement();
             let h='';
             for (let i=0; i<16; i++){
-                let s = '<div class="grid-item">' + i*2 + '</div>';
-
+                let s = '<div class="grid-item">' + arr[i] + '</div>';
                 h += s;
             }
             e.innerHTML = h;
+        }
+
+        function getBoardREST() {
+            fetch('rest/getboard')
+                .then(response => response.json())
+                .then(data => render(data));
         }
         </script>
 
@@ -51,6 +57,7 @@
     <div class="grid-item">15</div>  
     <div class="grid-item blank-item"></div>  
   </div>
-
+<br/>
+<button onclick="getBoardREST()">test 2</button>
 </body>
 </html>

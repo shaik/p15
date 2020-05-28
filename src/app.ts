@@ -10,14 +10,18 @@ const HOST = env.HOST || "127.0.0.1";
 const board = new Board(4);
 
 export const renderBoard =  ({ response }: { response: any }) => {
-  console.log('renderBoard')
   response.type = "html";
   response.body = "<h1>Hello Board</h1>";
   response.body += render(board);
+  response.body = JSON.stringify(board.board.flat());
 
   response.status = 200
 };
 
+export const getBoard = (({ response }: { response: any })=> {
+  response.body = JSON.stringify(board.board.flat());
+  response.status = 200
+})
 
 export const clickXY = ({
   params,
@@ -29,8 +33,21 @@ export const clickXY = ({
   }
   response: any
 }) => {
-  response.type = "html";
-  response.body = "<h1>Hello Board</h1>";
+  board.move(parseInt(params.x), parseInt(params.y))
+  response.body = JSON.stringify(board.board.flat());
+  response.status = 200
+};
+
+export const move = ({
+  params,
+  response
+}: {
+  params: {
+    x: string,
+    y: string
+  }
+  response: any
+}) => {
   board.move(parseInt(params.x), parseInt(params.y))
   response.body += render(board);
   response.status = 200
@@ -40,7 +57,10 @@ export const clickXY = ({
 const router = new Router();
 router
   .get("/p15", renderBoard)
-  .get("/move/:x/:y", clickXY);
+  .get("/move/:x/:y", clickXY)
+  .get("/rest/getboard", getBoard)
+  .get("/rest/move/:x/:y", move)
+
 
 const app = new Application();
 
