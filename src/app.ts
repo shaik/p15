@@ -1,4 +1,4 @@
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { Application, Router, send } from "https://deno.land/x/oak/mod.ts";
 import { Board } from "./board.ts";
 import { render } from "./renderer.ts";
 
@@ -47,6 +47,13 @@ const app = new Application();
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-console.log(`Listening on port ${PORT}...`);
+app.use(async (context) => {
+  await send(context, context.request.url.pathname, {
+    root: `${Deno.cwd()}/static`,
+    index: "index.html",
+  });
+});
 
+console.log(`Listening on port ${PORT}...`);
+console.log(' root ' + `${Deno.cwd()}/static`);
 await app.listen(`${HOST}:${PORT}`);
