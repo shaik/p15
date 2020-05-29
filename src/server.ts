@@ -2,6 +2,7 @@ import { Application, Router, send } from "https://deno.land/x/oak/mod.ts";
 import { Board } from "./board.ts";
 
 const board = new Board(4);
+let listenPromise: Promise<void>;
 
 export const getBoard = (({ response }: { response: any }) => {
   response.body = JSON.stringify(board.board.flat());
@@ -21,17 +22,30 @@ export const shuffle = ({ params, response }: {
   params: { times: string };
   response: any;
 }) => {
-  console.log("suffle. times=", params.times);
   board.shuffle(parseInt(params.times) || 1);
   response.body = JSON.stringify(board.board.flat());
   response.status = 200;
 };
 
+export const startServer = (host: string, port : number) => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    listenPromise = app.listen(`${host}:${port}`);
+}
+
+export const killServer = async () => {
+    controller.abort();
+    await listenPromise;
+}
+
+const controller = new AbortController();
+const { signal } = controller;
+
 const router = new Router();
 router
   .get("/rest/getboard", getBoard)
   .get("/rest/move/:x/:y", move)
-  .get("/rest/shuffle/:x", shuffle);
+  .get("/rest/shuffle/:times", shuffle);
 
 export const app = new Application();
 
