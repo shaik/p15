@@ -11,7 +11,7 @@ function initImageRLs() {
   }
 }
 export function render(b: Board): string {
-  let s: string = "";
+  let s: string = "<h1>P15 (SSR)</h1>";
   let l: string[];
   for (let y = 0; y < b.size; y++) {
     l = [];
@@ -33,6 +33,3 @@ function sq(x: number, y: number, v: number): string {
   s += "</a>";
   return s;
 }
-
-// https://image.flaticon.com/icons/svg/752/752666.svg [good]
-// https://image.flaticon.com/icons/svg/752/7526630.svg [bad]

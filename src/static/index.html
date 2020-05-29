@@ -13,12 +13,15 @@
         }
         function render (arr){
             let e = getGridElement();
-            let h='';
+            let h='', s='';
             for (let i=0; i<16; i++){
                 const y = Math.floor(i / 4);
                 const x = i % 4;
-                let cssClass = arr[i] == 0 ? "blank-item" : "grid-item";
-                let s = '<div class="' + cssClass + '" onclick="move(' + x + ',' + y + ')">' + arr[i] + '</div>';
+                if (arr[i] ==0) {
+                s = '<div class="blank-item" onclick="move(' + x + ',' + y + ')"></div>';
+                } else {
+                    s = '<div class="grid-item" onclick="move(' + x + ',' + y + ')">' + arr[i] + '</div>';    
+                }
                 h += s;
             }
             e.innerHTML = h;

@@ -10,7 +10,6 @@ const board = new Board(4);
 
 export const renderBoard = ({ response }: { response: any }) => {
   response.type = "html";
-  response.body = "<h1>Hello Board</h1>";
   response.body += render(board);
   response.body = JSON.stringify(board.board.flat());
 
@@ -22,31 +21,15 @@ export const getBoard = (({ response }: { response: any }) => {
   response.status = 200;
 });
 
-export const clickXY = ({
-  params,
-  response,
-}: {
-  params: {
-    x: string;
-    y: string;
-  };
-  response: any;
-}) => {
+export const clickXY = ({params,response,}: {
+params: {x: string; y: string;}; response: any; }) => {
   board.move(parseInt(params.x), parseInt(params.y));
   response.body = JSON.stringify(board.board.flat());
   response.status = 200;
 };
 
-export const move = ({
-  params,
-  response,
-}: {
-  params: {
-    x: string;
-    y: string;
-  };
-  response: any;
-}) => {
+export const move = ({params,response,}: {
+params: {x: string; y: string;}; response: any; }) => {
   board.move(parseInt(params.x), parseInt(params.y));
   response.body = JSON.stringify(board.board.flat());
   response.status = 200;
