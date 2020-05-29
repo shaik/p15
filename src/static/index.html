@@ -40,6 +40,15 @@
 
 
         }
+        function shuffle() {
+            let times = document.querySelector ("#numShuffle").value;
+            let url = '/rest/shuffle/'+times;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => render(data));
+
+        }
         </script>
 
     </head>
@@ -52,6 +61,6 @@
 
 <div id="grid" class="grid-container"></div>
 <br/>
-
+<button onclick="shuffle()">Shuffle</button><input type="number" id="numShuffle" min="1" max="999" value="10"/>
 </body>
 </html>

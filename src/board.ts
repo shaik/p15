@@ -56,7 +56,7 @@ export class Board {
       if (this.getVal(px, py + 1) > 0) optionalMoves.push([px, py + 1]);
       // console.log("options =", optionalMoves);
       let randomMove =
-        optionalMoves[Math.floor(Math.random() * optionalMoves.length)];
+      optionalMoves[Math.floor(Math.random() * optionalMoves.length)];
       //console.log(i, 'move=', randomMove);
       this.move(randomMove[0], randomMove[1]);
     }
