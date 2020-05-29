@@ -13,13 +13,6 @@ export const getBoard = (({ response }: { response: any }) => {
   response.status = 200;
 });
 
-export const clickXY = ({params,response,}: {
-params: {x: string; y: string;}; response: any; }) => {
-  board.move(parseInt(params.x), parseInt(params.y));
-  response.body = JSON.stringify(board.board.flat());
-  response.status = 200;
-};
-
 export const move = ({params,response,}: {
 params: {x: string; y: string;}; response: any; }) => {
   board.move(parseInt(params.x), parseInt(params.y));
@@ -29,7 +22,6 @@ params: {x: string; y: string;}; response: any; }) => {
 
 const router = new Router();
 router
-  .get("/move/:x/:y", clickXY)
   .get("/rest/getboard", getBoard)
   .get("/rest/move/:x/:y", move);
 

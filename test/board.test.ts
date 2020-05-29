@@ -40,11 +40,9 @@ Deno.test("set board", () => {
 Deno.test("shuffle", () => {
   const l: number = 4;
   const board = new Board(l);
-  console.log();
-  console.log(board.toString());
   board.shuffle(999);
-  console.log(board.toString());
-
+  assertEquals(sumBoard(board), l * l * (l * l - 1) / 2);
+  // todo: check validity of board after shuffle
 });
 
 Deno.test("randomize", () => {
