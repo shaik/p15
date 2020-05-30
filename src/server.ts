@@ -27,15 +27,17 @@ export const shuffle = ({ params, response }: {
   response.status = 200;
 };
 
-export const startServer = (host: string, port : number) => {
+export const startServer =  (host: string, port : number) => {
     const controller = new AbortController();
     const { signal } = controller;
     listenPromise = app.listen(`${host}:${port}`);
+    return listenPromise;
+
 }
 
-export const killServer = async () => {
+export const killServer =  () => {
     controller.abort();
-    await listenPromise;
+    return listenPromise;
 }
 
 const controller = new AbortController();
