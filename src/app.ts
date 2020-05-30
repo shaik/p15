@@ -1,4 +1,4 @@
-import {app, startServer} from "./server.ts"
+import {startServer} from "./server.ts"
 
 const env = Deno.env.toObject();
 const PORT: number = parseInt(env.PORT) || 4000;
