@@ -30,14 +30,12 @@ export const shuffle = ({ params, response }: {
 export const startServer =  (host: string, port : number) => {
     const controller = new AbortController();
     const { signal } = controller;
-    listenPromise = app.listen(`${host}:${port}`);
-    return listenPromise;
-
+    return app.listen(`${host}:${port}`);
 }
 
 export const killServer =  () => {
-    controller.abort();
-    return listenPromise;
+  console.log('aborting server');
+  controller.abort();
 }
 
 const controller = new AbortController();

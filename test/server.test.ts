@@ -7,9 +7,9 @@ import {delay} from "https://deno.land/x/delay/delay.js"
 
 
 Deno.test("start server",  async () => {;
-  await startServer("127.0.0.1", 3333);
-  await killServer();
-
+  const listenPromise = startServer("127.0.0.1", 3333);
+  killServer();
+  await listenPromise;
   assertEquals(1, 1);
 
 })
