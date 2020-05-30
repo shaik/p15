@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "run": {
+      "cmd": "deno run ./src/app.ts",
+      "desc": "Start the sever",
+      "unstable": true
+    }
+  },
+  "allow": [
+    "read",
+    "net",
+    "env"
+  ],
+  "watch" : [
+    ".\\src"
+  ],
+  "files" : [
+    "app.ts"
+  ],
+  "debug" : true
+}
