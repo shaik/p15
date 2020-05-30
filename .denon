@@ -4,7 +4,13 @@
       "cmd": "deno run ./src/app.ts",
       "desc": "Start the sever",
       "unstable": true
+    },
+    "test": {
+      "cmd": "deno test ./test/",
+      "desc": "test",
+      "unstable": true
     }
+
   },
   "allow": [
     "read",
